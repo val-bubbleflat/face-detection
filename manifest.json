@@ -3,7 +3,7 @@
   "version": "1.0",
   "description": "Detect all faces",
   "manifest_version": 2,
-  "permission": [
+  "permissions": [
     "http://*/*",
     "https://*/*"
   ],
