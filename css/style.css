@@ -1,0 +1,11 @@
+.wrap{
+
+}
+
+.face, .landmark {
+    position: absolute;
+}
+
+.face {
+    border: 1px solid red;
+}

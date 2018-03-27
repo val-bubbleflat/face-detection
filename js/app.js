@@ -1,26 +1,31 @@
 const faceDetector = new window.FaceDetector();
+const wrap = document.createElement("div");
+wrap.classList.add("wrap");
+document.body.appendChild(wrap);
 
 async function detect() {
     const imgs = document.getElementsByTagName('img');
     for(let i = 0; i < imgs.length; i++){
         const faces = await faceDetector.detect(imgs[i]);
-        drawfaces(faces)
+        drawfaces(faces, imgs[i])
     }
 }
 
-async function drawfaces(faces) {
+async function drawfaces(faces, el) {
     faces.forEach(face => {
         console.log(face);
         const {width, height, top, left} = face.boundingBox;
-
+        const elPosition = el.getBoundingClientRect();
         const facebox = document.createElement('div');
         facebox.classList.add('face');
-        facebox.style.cssText = `
+        let position = `
             width: ${width}px;
             height: ${height}px;
-            top: ${top}px;
-            left: ${left}px;
+            top: ${top + elPosition.top}px;
+            left: ${left + elPosition.left}px;
         `;
+        facebox.style.cssText = position;
+
         face.landmarks.forEach(landmark => {
             const el = document.createElement('div');
             el.classList.add('landmark', landmark.type);
@@ -30,7 +35,7 @@ async function drawfaces(faces) {
             `;
             facebox.appendChild(el)
         })
-        document.appendChild(facebox);
+        wrap.appendChild(facebox);
     })
 }
 
