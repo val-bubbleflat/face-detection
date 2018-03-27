@@ -1,0 +1,19 @@
+{
+  "name": "Face Detector by Val",
+  "version": "1.0",
+  "description": "Detect all faces",
+  "manifest_version": 2,
+  "permission": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": ["js/app.js"]
+    }
+  ]
+}
